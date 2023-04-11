@@ -15,7 +15,7 @@ public class Player : MonoBehaviour {
 
     // shooting 
     public float shootCooldown = 0.2f;
-    private float lastShootTime;
+    private float lastShootTime = 0;
     
     // one manager of gamestate, instantiated by user
     public static Manager mg;
@@ -99,15 +99,11 @@ public class Player : MonoBehaviour {
 
     // shoots an egg prefab if spacebar is pressed
     private void checkShoot() {
-        if (Input.GetKey(KeyCode.Space)) {
-            if (Time.time - lastShootTime > shootCooldown) {
-                // create new projectile, egg, prefab
-                Instantiate(egg, position, transform.rotation);
-                // perform shoot state update on manager
-                mg.projectileCount++;
-            }
-            // update last shot time for cooldown function
-            lastShootTime = Time.time;
+        if (Input.GetKey("space") && Time.time > lastShootTime) {
+            // last shoot time = next time we are allowed to shoot an egg
+            lastShootTime = Time.time + shootCooldown;
+            Instantiate(egg, position, transform.rotation);
+            mg.projectileCount++;
         }
     }
 }

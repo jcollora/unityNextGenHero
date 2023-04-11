@@ -26,10 +26,19 @@ public class Projectile : MonoBehaviour {
 
     // does damage to enemy upon collision (it is the only case)
     private void OnTriggerEnter2D(Collider2D collider) {
+        bool killSwitch = false;
         if (collider.gameObject.name.Substring(0, 5) == "Plane") {
             Enemy target = collider.gameObject.GetComponent<Enemy>();
             target.hit(1);
-            // update the manager/ui state of projectriles to reflect -1 
+            killSwitch = true;
+        }
+        if (collider.gameObject.name.Substring(0, 2) == "wp") {
+            Waypoint target = collider.gameObject.GetComponent<Waypoint>();
+            target.hit(1);
+            killSwitch = true;
+        }
+        // update the manager/ui state of projectriles to reflect -1 
+        if (killSwitch) {
             mg.projectileCount--;
             Destroy(gameObject);
         }

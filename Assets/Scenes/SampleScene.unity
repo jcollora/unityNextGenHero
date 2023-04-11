@@ -425,8 +425,17 @@ MonoBehaviour:
   collideCount: 0
   enemyCount: 0
   kills: 0
+  planesMoveSequential: 1
+  showWaypoints: 1
   mouseMode: 0
   enemy: {fileID: 5967584556144499152, guid: e7c8bd4511a00e14180c6a5cffc6fe9a, type: 3}
+  wps: []
+  wp1: {fileID: 7293741867695435844, guid: fe497919a6a889f4bbd544fe80fe070f, type: 3}
+  wp2: {fileID: 3723515240285508942, guid: b1cf15f55a5c5e041b8ba4559290ef99, type: 3}
+  wp3: {fileID: -1350013369500544620, guid: 52d049cce25c0b749b239b824c5357c6, type: 3}
+  wp4: {fileID: 6476311675343670632, guid: 16fa2ea3f83145240834c65db3210bc0, type: 3}
+  wp5: {fileID: 2762539239618937082, guid: fc60b1fa749a68b4ea006ef8d7e8bf55, type: 3}
+  wp6: {fileID: 5474147115810362789, guid: 4edc6cb79e5cff443890218907f39984, type: 3}
   stateStatus: {fileID: 1401252124}
 --- !u!1 &1401252120
 GameObject:
