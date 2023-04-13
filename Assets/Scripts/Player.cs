@@ -23,6 +23,9 @@ public class Player : MonoBehaviour {
     // projectile prefab
     public Projectile egg;
 
+    // cooldown bar
+    public GameObject cooldownBar;  
+
     void Start() {
         velocity = 20;
         mouseMode = true;
@@ -105,5 +108,36 @@ public class Player : MonoBehaviour {
             Instantiate(egg, position, transform.rotation);
             mg.projectileCount++;
         }
+
+        ///////////// Shoot Cooldown UI ///////////////////
+        // next valid shoot time < current timeXX
+
+        //next shoot time is more than current time (so we can't shoot yet)
+        if(Time.time - lastShootTime <= 0)
+        {
+            cooldownBar.transform.localScale = new Vector3(3, 0.28f, 0); 
+            //have shot recently, need a cooldown bar
+            float timeRemaining = lastShootTime - Time.time;
+            float percentageOfBar = timeRemaining / shootCooldown;
+            Vector3 scaled = Vector3.Scale(cooldownBar.transform.localScale, new Vector3((percentageOfBar), 1, 1));
+            cooldownBar.transform.localScale = scaled;
+
+
+            Debug.Log(percentageOfBar * 100);
+            
+
+        } else {
+
+            //reducing amount
+            cooldownBar.transform.localScale = new Vector3(0, 0, 0); //0? 1?
+
+
+            //have not shot recently, no cooldown bar
+            //float cooldown = last - Time.time;
+            //float fillamt = cooldownLeft
+        }
+        ///////////// Shoot Cooldown UI ///////////////////
+
+
     }
 }
