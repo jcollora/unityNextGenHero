@@ -10,10 +10,6 @@ public class Manager : MonoBehaviour {
     public int enemyCount;
     public int kills;
 
-    //bools for game control
-    //public bool planesMoveSequential = true;
-    public bool showWaypoints = true;
-
     // movment mode
     public bool mouseMode;
 
@@ -52,19 +48,9 @@ public class Manager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Q)) {
             Application.Quit();
         }
-        // if (Input.GetKeyDown(KeyCode.J)) {
-        //     //toggle sequential vs random plane movement on pressing J
-        //     planesMoveSequential = ! planesMoveSequential;
-
-        // }
-        if (Input.GetKeyDown(KeyCode.H)) {
-            //toggle showing waypoints vs hidden (and largely inactive waypoints) on pressing H
-            showWaypoints = ! showWaypoints;
-        }
         
         spawnEnemies();
         updateStateStatus();
-        changeWaypointVisibility();
     }
 
     // returns a position within inner 90* of the sb
@@ -111,34 +97,5 @@ public class Manager : MonoBehaviour {
         stateStatus.text += "ENEMY: Count(" + enemyCount + ") Destroyed( " + kills + ")";
     } 
 
-    private void changeWaypointVisibility()
-    {        
-        Color c;
-        if (showWaypoints) {
-            for (int i = 0; i < wps.Length; i++) 
-            {
-                Renderer r = wps[i].gameObject.GetComponent<Renderer>();
-                c = r.material.color;
-                c.a = 1;
-                r.material.SetColor("_Color", c);
-            }
-        } 
-        else {
-            //not showing the waypoints (so make alpha 0, have collider disabled)
-            for(int i = 0; i < wps.Length; i++)
-            {
-                //reduce alpha
-                Renderer r = wps[i].gameObject.GetComponent<Renderer>();
-                c = r.material.color;
-                c.a = 0; // decrease alpha by 1/4 of its maximum value
-                c.a = Mathf.Clamp(c.a, 0f, 1f); // clamp alpha to be between 0 and its maximum value    
-                r.material.SetColor("_Color", c);
-            }
-        }
-        //set collider to correct position to match if it is hidden
-        for(int i = 0; i < wps.Length; i++)
-        {
-            wps[i].gameObject.GetComponent<BoxCollider2D>().isTrigger = showWaypoints;
-        }        
-    }
+    
 }

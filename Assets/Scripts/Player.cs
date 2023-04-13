@@ -108,10 +108,7 @@ public class Player : MonoBehaviour {
             Instantiate(egg, position, transform.rotation);
             mg.projectileCount++;
         }
-
-        ///////////// Shoot Cooldown UI ///////////////////
-        // next valid shoot time < current timeXX
-
+        
         //next shoot time is more than current time (so we can't shoot yet)
         if(Time.time - lastShootTime <= 0)
         {
@@ -121,22 +118,9 @@ public class Player : MonoBehaviour {
             float percentageOfBar = timeRemaining / shootCooldown;
             Vector3 scaled = Vector3.Scale(cooldownBar.transform.localScale, new Vector3((percentageOfBar), 1, 1));
             cooldownBar.transform.localScale = scaled;
-
-
-            Debug.Log(percentageOfBar * 100);
-            
-
         } else {
-
-            //reducing amount
-            cooldownBar.transform.localScale = new Vector3(0, 0, 0); //0? 1?
-
-
-            //have not shot recently, no cooldown bar
-            //float cooldown = last - Time.time;
-            //float fillamt = cooldownLeft
+            cooldownBar.transform.localScale = new Vector3(0, 0, 0); 
         }
-        ///////////// Shoot Cooldown UI ///////////////////
 
 
     }
